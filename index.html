@@ -4,24 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-solid-straight/css/uicons-solid-straight.css'>
   <link rel="stylesheet" href="./assets/style.css">
   <title>Sistema de Gym</title>
 </head>
 <body>
-  <header class="bg-black h-20">
-    <h1 class="title text-[#bcf7a4] text-5xl">WOLF GYM</h1>
-    <button> campanita</button>
+  <header class="bg-black h-20 flex justify-around">
+    <h1 class="title text-[#bcf7a4] text-5xl p-4">WOLF GYM</h1>
+    <button><i class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
   </header>
   <main class="back-main">
-    <picture>
-      <img src="" alt="Logo del gimnasio">
-    </picture>}
-    <div>
-      <button> <a href="./assets/tables.html">INGRESAR</a> </button>
-      <button> <a href="./assets/payment.html"></a>COBRAR MEMBRESIA</button>
-      <button> <a href="./assets/register.html"></a>REGISTRAR CLIENTE</button>
-    </div>
+    <section class="flex justify-around pt-24 pb-20 items-center">
+      <div>
+        <img class="w-80 rounded" src="./assets/img/logoWolfGym.png" alt="Logo del gimnasio">
+        </div>
+      <div class="flex flex-col gap-5">
+        <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="./assets/tables.html">INGRESAR</a> </button>
+        <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="./assets/payment.html">COBRAR MEMBRESIA</a></button>
+        <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="./assets/register.html">REGISTRAR CLIENTE</a></button>
+      </div>
+    </section>
   </main>
+  <footer class="bg-black h-20 flex justify-center">
+    <h2 class="text-[#bcf7a4] font-bold font-sans pt-6">Creado por ANUBIT</h2>
+    <img class="w-20" src="./assets/img/ANUBIT-LOGO.png" alt="Logo de ANUBIT">
+  </footer>
   <script src="./assets/main.js"></script>
 </body>
-</html>
+</html> 
