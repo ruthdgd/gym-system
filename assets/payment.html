@@ -4,17 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-solid-straight/css/uicons-solid-straight.css'>
   <link rel="stylesheet" href="./style.css">
   <title>Document</title>
 </head>
 <body>
-  <header>
-    <h1> WOLF GYM </h1>
-    <button> <a href="../index.html">INICIO</a></button>
-    <button> <a href="./tables.html">INGRESAR</a> </button>
-    <button> <a href="./register.html">REGISTRAR CLIENTE</a></button>
-    <button> campanita</button>
+  <header class="bg-black flex justify-around">
+    <h1 class="title text-[#bcf7a4] text-5xl p-4"> WOLF GYM </h1>
+    <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]" > <a href="../index.html">INICIO</a></button>
+    <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="./tables.html">INGRESAR</a> </button>
+    <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="./register.html">REGISTRAR CLIENTE</a></button>
+     <button><i class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
   </header>
+  <main>
+    <h2>Registrar pago</h2>
+    <div>
+      <label for="">DNI</label>
+      <input type="text" name="" id="">
+      <label for="">Fecha</label>
+      <input type="date" name="" id="">
+      <label for="">Monto</label>
+      <input type="number" name="" id="">
+      <button>Cancelar</button>
+      <button>Agregar</button>
+    </div>
+  </main>
   <footer class="bg-black h-20 flex justify-center">
     <h2 class="text-[#bcf7a4] font-bold font-sans pt-6">Creado por ANUBIT</h2>
     <img class="w-20" src="./img/ANUBIT-LOGO.png" alt="Logo de ANUBIT">
