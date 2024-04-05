@@ -9,77 +9,81 @@
       href="https://cdn-uicons.flaticon.com/2.2.0/uicons-solid-straight/css/uicons-solid-straight.css"
     />
     <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+    <title>Sistema de Gym</title>
   </head>
   <body>
     <header class="bg-black flex justify-around">
       <h1 class="title text-[#bcf7a4] text-5xl p-4">WOLF GYM</h1>
-      <button
-        class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"
-      >
+      <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]">
         <a href="../index.html">INICIO</a>
       </button>
-      <button
-        class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"
-      >
+      <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]">
         <a href="./tables.html">INGRESAR</a>
       </button>
-      <button
-        class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"
-      >
+      <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]">
         <a href="./payment.html">COBRAR MEMBRESIA</a>
       </button>
       <button>
-        <i
-          class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"
-        ></i>
+        <i class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2">
+        </i>
       </button>
     </header>
-    <main class="bg-[#212121]">
-      <div class="bg-[#212121] flex flex-col gap-5 items-center justify-around">
-        <h2 class="text-[#bcf7a4] text-2xl font-bold pt-8">REGISTRAR CLIENTE</h2>
-        <div class="flex flex-col">
-          <label class="text-[#bcf7a4]" for="">Nombre y Apellido</label>
-          <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="" />
-        </div>
-        <div class="flex gap-5">
+    <main class="bg-[#212121]" id="nuevoCliente">
+      <form>
+        <div class="bg-[#212121] flex flex-col gap-5 items-center justify-around">
+          <h2 class="text-[#bcf7a4] text-2xl font-bold pt-8">REGISTRAR CLIENTE</h2>
           <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">DNI</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="" />
+            <label class="text-[#bcf7a4]" for="nombreCliente">Nombre y Apellido</label>
+            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="nombreCliente" />
+            <div id="error-nombre" class="text-red-500 hidden">Por favor completa este campo.</div>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex flex-col">
+              <label class="text-[#bcf7a4]" for="dniCliente">DNI</label>
+              <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="dniCliente" />
+              <div id="error-dni" class="text-red-500 hidden">Por favor completa este campo.</div>
+            </div>
+            <div class="flex flex-col">
+              <label class="text-[#bcf7a4]" for="telefonoCliente">Telefono</label>
+              <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="telefonoCliente" />
+              <div id="error-telefono" class="text-red-500 hidden">Por favor completa este campo.</div>
+            </div>
+          </div>
+          <div class="flex gap-5">
+            <div class="flex flex-col">
+              <label class="text-[#bcf7a4]" for="diasCliente">Dias que asiste</label>
+              <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="diasCliente" />
+              <div id="error-dias" class="text-red-500 hidden">Por favor completa este campo.</div>
+            </div>
+            <div class="flex flex-col">
+              <label class="text-[#bcf7a4]" for="horarioCliente">Horario</label>
+              <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="horarioCliente" />
+              <div id="error-horario" class="text-red-500 hidden">Por favor completa este campo.</div>
+            </div>
+            <div class="flex flex-col">
+              <label class="text-[#bcf7a4]" for="pagoCliente">Monto</label>
+              <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="pagoCliente" />
+              <div id="error-pago" class="text-red-500 hidden">Por favor completa este campo.</div>
+            </div>
           </div>
           <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">Telefono</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="" />
+            <label class="text-[#bcf7a4]" for="obervacionesCliente">Otros/Obervaciones</label>
+            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="obervacionesCliente" />
+          </div>
+          <div class="flex gap-5 pb-8">
+            <button type="reset" class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
+            <button type="submit" class="bg-[#bcf7a4] p-2 rounded">Agregar</button>
           </div>
         </div>
-        <div class="flex gap-5">
-          <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">Dias que asiste</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4] type="text" name="" id="" />
-          </div>
-          <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">Horario</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="" />
-          </div>
-          <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">Monto</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="number" name="" id="" />
-          </div>
-        </div>
-        <div class="flex flex-col">
-          <label class="text-[#bcf7a4]" for="">Otros/Obervaciones</label>
-          <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="" />
-        </div>
-        <div class="flex gap-5 pb-8">
-          <button class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
-          <button class="bg-[#bcf7a4] p-2 rounded">Agregar</button>
-        </div>
-      </div>
+      </form>
+
     </main>
     <footer class="bg-black h-20 flex justify-center">
       <h2 class="text-[#bcf7a4] font-bold font-sans pt-6">Creado por ANUBIT</h2>
       <img class="w-20" src="./img/ANUBIT-LOGO.png" alt="Logo de ANUBIT" />
     </footer>
-    <script src="./main.js"></script>
+    <script type="module" src="./js/register.js"></script>
+    <script type="module" src="./js/tables.js"></script>
   </body>
 </html>

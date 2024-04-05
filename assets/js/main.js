@@ -1,0 +1,187 @@
+/////////////////Cerrar y abrir secciones//////////////////
+    const navbarHome = document.getElementById("navbarHome")
+    const navbarTables = document.getElementById("navbarTables")
+    const botonIngresar = document.getElementById("ingresar")
+    const botonRegistrar = document.getElementById("registrar")
+    const botonPagar = document.getElementById("cobrar")
+    const paginaDeInicio = document.getElementById("home")
+    const ingresarASitema = document.getElementById("tables")
+    const registrarCliente = document.getElementById("register")
+    const cobrar = document.getElementById("cobro")
+    const navbHome = document.getElementById("navbHome")
+    const navbIngresar = document.getElementById("navbIngresar")
+    const navbCobro = document.getElementById("navbCobro")
+    const navbRegister = document.getElementById("navbRegister")
+
+    botonIngresar.addEventListener("click", () =>{
+        ingresarASitema.classList.remove("hidden")
+        paginaDeInicio.classList.add("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })
+    botonRegistrar.addEventListener("click", () =>{
+        registrarCliente.classList.remove("hidden")
+        paginaDeInicio.classList.add("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })    
+    botonPagar.addEventListener("click", () =>{
+        cobrar.classList.remove("hidden")
+        paginaDeInicio.classList.add("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })
+    navbHome.addEventListener("click",() =>{
+        paginaDeInicio.classList.remove("hidden")
+        ingresarASitema.classList.add("hidden")
+        registrarCliente.classList.add("hidden")
+        cobrar.classList.add("hidden")
+        navbarHome.classList.remove("hidden")
+        navbarTables.classList.add("hidden")
+    })
+    navbIngresar.addEventListener("click",() =>{
+        paginaDeInicio.classList.add("hidden")
+        ingresarASitema.classList.remove("hidden")
+        registrarCliente.classList.add("hidden")
+        cobrar.classList.add("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })
+    navbRegister.addEventListener("click",() =>{
+        paginaDeInicio.classList.add("hidden")
+        ingresarASitema.classList.add("hidden")
+        registrarCliente.classList.remove("hidden")
+        cobrar.classList.add("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })
+    navbIngresar.addEventListener("click",() =>{
+        paginaDeInicio.classList.add("hidden")
+        ingresarASitema.classList.remove("hidden")
+        registrarCliente.classList.add("hidden")
+        cobrar.classList.add("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })
+    navbCobro.addEventListener("click",() =>{
+        paginaDeInicio.classList.add("hidden")
+        ingresarASitema.classList.add("hidden")
+        registrarCliente.classList.add("hidden")
+        cobrar.classList.remove("hidden")
+        navbarTables.classList.remove("hidden")
+        navbarHome.classList.add("hidden")
+    })
+
+
+///////////////////////////Armar la tabla/////////////////////////
+
+const evaluarLocalStorage = () => {
+    console.log(JSON.parse(localStorage.getItem("tablaData")));
+    return JSON.parse(localStorage.getItem("tablaData")) || [];
+  };
+  
+const guardarTablaEnLocalStorage = (tablaData) => {
+    localStorage.setItem("tablaData", JSON.stringify(tablaData));
+  };
+  const registros = JSON.parse(localStorage.getItem("tablaData")) || [];
+
+  document.getElementById("nuevoCliente").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ingresarASitema = document.getElementById("tables")
+    const registrarCliente = document.getElementById("register")
+    const nombre = document.getElementById("nombreCliente").value;
+    const dni = document.getElementById("dniCliente").value;
+    const telefono = document.getElementById("telefonoCliente").value;
+    const dias = document.getElementById("diasCliente").value;
+    const horario = document.getElementById("horarioCliente").value;
+    const pago = document.getElementById("pagoCliente").value;
+
+    if (nombre === '') {
+        document.getElementById("error-nombre").classList.remove("hidden");
+      }
+    if (dni === '') {
+        document.getElementById("error-dni").classList.remove("hidden");
+    }
+    if (telefono === '') {
+        document.getElementById("error-telefono").classList.remove("hidden");
+    }
+    if (dias === '') {
+        document.getElementById("error-dias").classList.remove("hidden");
+    }
+    if (horario === '') {
+        document.getElementById("error-horario").classList.remove("hidden");
+    }
+    // if (isNaN(pago)) {
+    //     document.getElementById("error-pago").classList.remove("hidden");
+    // }
+    
+      // Si algún campo está vacío, se detiene la ejecución
+      if (nombre === '' || dni === '' || telefono === '' 
+      || dias === '' || horario === '') {
+        return; // Detener la ejecución de la función
+      }
+    
+      document.getElementById("error-nombre").classList.add("hidden");
+      document.getElementById("error-dni").classList.add("hidden");
+      document.getElementById("error-telefono").classList.add("hidden");
+      document.getElementById("error-dias").classList.add("hidden");
+      document.getElementById("error-horario").classList.add("hidden");
+      document.getElementById("error-pago").classList.add("hidden");
+
+      const registro ={
+        id : uuidv4(),
+        nombre: nombre,
+        dni: dni,
+        telefono: telefono,
+        dias: dias,
+        horario: horario,
+        pago: pago
+      }
+      let tablaData = evaluarLocalStorage();
+      tablaData.push(registro)
+
+      localStorage.setItem("tablaData", JSON.stringify(tablaData));
+      generarTabla();
+      ingresarASitema.classList.remove("hidden")
+      registrarCliente.classList.add("hidden")
+      document.getElementById("nuevoCliente").reset();
+})
+
+const generarTabla = () =>{
+    const tableBody = document.getElementById("tbody-clientes")
+    tableBody.innerHTML = ""
+    const registros = evaluarLocalStorage();
+    if (registros){
+    registros.forEach(registro => {
+        tableBody.innerHTML += `
+          <tr class="border border-slate-400 border-white mt-10">
+              <td class="text-center text-white">${
+                registro.nombre
+              }</td>
+              <td class="text-center text-white">${
+                registro.dni
+              }</td>
+              <td class="text-center text-white">${(
+                registro.telefono
+              )}</td>
+              <td class="text-center text-white">${registro.dias}</td>
+              <td class="text-center text-white">${registro.horario}</td>
+    
+              <td class="text-center text-white" >${registro.pago}</td>
+              <td class="text-[#64c27b] flex justify-center gap-2"> 
+                <button class="edit-btn" data-id="${
+                  registro.id
+                }"><i class="fi fi-sr-edit-alt"></i> 
+                </button>
+                <button class="delete-btn" onclick="mostrarModalEliminar('${
+                  registro.id
+                }')"('${registro.id}')"><i class="fi fi-sr-trash"></i> 
+                </button>
+              </td>
+          </tr>
+        `
+    });}
+}
+document.addEventListener("DOMContentLoaded", function() {
+    generarTabla();
+  });

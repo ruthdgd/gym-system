@@ -6,7 +6,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-solid-straight/css/uicons-solid-straight.css'>
   <link rel="stylesheet" href="./style.css">
-  <title>Document</title>
+  <title>Sistema de Gym</title>
 </head>
 <body>
   <header class="bg-black flex justify-around">
@@ -16,10 +16,10 @@
     <button class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="./register.html">REGISTRAR CLIENTE</a></button>
      <button><i class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
   </header>
-  <main class="bg-[#212121]">
+  <main class="bg-[#212121] tabla-clientes">
     <table class="w-full">
       <thead class="text-[#bcf7a4] w-full">
-        <tr class="w-full border border-slate-400"">
+        <tr class="w-full border border-slate-400">
           <th class="text-center" >Nombre y Apellido</th>
           <th class="text-center" >DNI</th>
           <th class="text-center" >Telefono</th>
@@ -28,7 +28,7 @@
           <th class="text-center" >Pagos</th>
           <th class="text-center">Acciones</th>
         </tr>
-        <tbody>
+        <tbody id="tbody-clientes">
           <tr>
             <td class="text-center"></td>
             <td class="text-center"></td>
@@ -49,6 +49,7 @@
     <h2 class="text-[#bcf7a4] font-bold font-sans pt-6">Creado por ANUBIT</h2>
     <img class="w-20" src="./img/ANUBIT-LOGO.png" alt="Logo de ANUBIT">
   </footer>
-  <script src="./main.js"></script>
+  <script type="module" src="./js/register.js"></script>
+  <script  type="module" src="./js/tables.js"></script>
 </body>
 </html>
