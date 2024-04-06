@@ -1,7 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Archivo+Black&family=Arvo&family=Josefin+Sans&family=Kanit:wght@100;500&family=Lobster+Two:wght@700&family=Lumanosimo&family=Mukta:wght@500&family=Nunito:wght@300&family=Tilt+Neon&family=Ysabeau+Infant:wght@500&display=swap');
    /* font-family: "Archivo Black", sans-serif; */
 
-.back-main{
+   .content{
+    width: 30vw;
+    height: auto;
+    background-color: #212121;
+    position: absolute;
+    top: 0;
+    transform: translate(-42%, 100%);
+    display: none;
+    overflow: hidden;
+  }
+  .content.active {
+    display: block;
+    border: solid 2px #bcf7a4;
+  }
+.campana .notify::before {
+  position: absolute;
+  content: attr(data-count);
+  /* content: "1"; */
+  top: 26px;
+  right: 240px;
+  /* background: #bcf7a4; */
+  background: #212121;
+  line-height: 100%;
+  text-align: center;
+  padding: 4px;
+  border-radius: 50%;
+  font-size: 50px;
+  padding: 3px, 15px;
+  font-weight: bold;
+  /* color: #212121; */
+  color:#bcf7a4;
+  font-size: 2rem;
+  transition: opacity 0.1s ease-out;
+}
+
+   .back-main{
   width: 100%;
   background-image: linear-gradient(to right, #1f211d9f, #00992969), url(./img/bg-gym.jpg);
   background-position: center;

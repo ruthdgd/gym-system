@@ -1,4 +1,4 @@
-/////////////////Cerrar y abrir secciones//////////////////
+/////////////////Cerrar y abrir secciones/////////////////////////////////////////////////////////////////////////////
     const navbarHome = document.getElementById("navbarHome")
     const navbarTables = document.getElementById("navbarTables")
     const botonIngresar = document.getElementById("ingresar")
@@ -72,9 +72,7 @@
         navbarHome.classList.add("hidden")
     })
 
-
-///////////////////////////Armar la tabla/////////////////////////
-
+///////////////////////////Armar la tabla////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const evaluarLocalStorage = () => {
     console.log(JSON.parse(localStorage.getItem("tablaData")));
     return JSON.parse(localStorage.getItem("tablaData")) || [];
@@ -185,6 +183,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   document.getElementById("agregarCobro").addEventListener("click", () => {
+    const ingresarASitema = document.getElementById("tables")
+    const cobrar = document.getElementById("cobro")
     const dniCobro = document.getElementById("dniCobro").value;
     const fechaCobro = document.getElementById("fechaCobro").value;
     const montoCobro = document.getElementById("montoCobro").value;
@@ -219,11 +219,96 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("fechaCobro").value = '';
     document.getElementById("montoCobro").value = '';
 
-    // Mostrar un mensaje de éxito
-    alert("El pago se registró correctamente.");
+    // alert("El pago se registró correctamente.");
+    cobrar.classList.add("hidden")
+    ingresarASitema.classList.remove("hidden")
 });
-
 
   // onclick="mostrarModalEliminar('${
   //   registro.id
   // }')"
+////////////////////Obtener la Fecha actual///////////////////////////////////////////////////////////////////////////
+  function actualizarFecha() {
+    // Obtener la fecha de hoy
+    const fechaHoy = new Date();
+    
+    // Obtener el año, mes y día por separado
+    const year = fechaHoy.getFullYear();
+    const month = fechaHoy.getMonth() + 1; // Los meses van de 0 a 11
+    const day = fechaHoy.getDate();
+    
+    // Formatear la fecha como YYYY-MM-DD
+    const fechaFormateada = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+    
+    // Guardar la fecha en localStorage
+    localStorage.setItem('fechaActualizacion', fechaFormateada);
+  }
+  
+  function obtenerFechaActualizacion() {
+    // Obtener la fecha guardada en localStorage
+    const fechaGuardada = localStorage.getItem('fechaActualizacion');
+    
+    // Si no hay fecha guardada, o si la fecha guardada es diferente a la de hoy, actualizarla
+    if (!fechaGuardada || fechaGuardada !== obtenerFechaHoy()) {
+      actualizarFecha();
+    }
+    
+    // Devolver la fecha actualizada
+    return localStorage.getItem('fechaActualizacion');
+  }
+  
+  function obtenerFechaHoy() {
+    // Obtener la fecha de hoy
+    const fechaHoy = new Date();
+    
+    // Obtener el año, mes y día por separado
+    const year = fechaHoy.getFullYear();
+    const month = fechaHoy.getMonth() + 1; // Los meses van de 0 a 11
+    const day = fechaHoy.getDate();
+    
+    // Formatear la fecha como YYYY-MM-DD
+    return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+  }
+
+////////////////////////Campana de notificaciones/////////////////////////////////////////////////////////////////////
+  const toggleButton = document.getElementById("toggleButton");
+  const content = document.querySelector(".content");
+  
+  toggleButton.addEventListener("click", () => {
+    content.classList.toggle("active");
+  });
+
+//////////////////////////////////Notificaciones//////////////////////////////////////////////////////////////////////
+  const nuevaNotificacion = () =>{
+    // Limpiar notificaciones anteriores
+    const notificaciones = document.getElementById("notificaciones");
+    notificaciones.innerHTML = "";
+
+    const registros = evaluarLocalStorage();
+    const hoy = new Date();
+
+    registros.forEach(registro => {
+        const fechaVencimiento = new Date(registro.fecha);
+        const tiempoRestante = fechaVencimiento.getTime() - hoy.getTime();
+        const diasRestantes = Math.floor(tiempoRestante / (1000 * 3600 * 24));
+
+        // Verificar si la cuota está a punto de vencer en un mes (30 días)
+        if (diasRestantes <= 30 && diasRestantes >= 0) {
+            // Crear elementos HTML para la notificación
+            const boton = document.createElement("button");
+            boton.innerHTML = "Cuota por vencer";
+            boton.classList.add("btn-notificacion");
+            boton.addEventListener("click", () => {
+                // Lógica para manejar el clic en la notificación
+                // Puedes agregar aquí lo que quieras que suceda cuando se hace clic en la notificación
+            });
+
+            const parrafo = document.createElement("p");
+            parrafo.innerHTML = `La cuota de ${registro.nombre} vence pronto (${diasRestantes} días)`;
+
+            // Agregar elementos a la lista de notificaciones
+            notificaciones.appendChild(boton);
+            notificaciones.appendChild(parrafo);
+        }
+    });
+  }

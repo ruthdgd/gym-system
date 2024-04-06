@@ -25,7 +25,14 @@
     <button id="navbCobro" class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="#cobro">COBRAR MEMBRESIA</a></button>
     <button id="navbRegister" class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="#register">REGISTRAR CLIENTE</a></button>
     </section>
-    <button><i id="notificaciones" class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
+    <section class="mt-5 flex flex-col justify-center items-center campana">
+      <button class="notify" id="toggleButton"><i id="notificaciones" class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
+      <div id="notificacion" class="content">
+        <div class="flex flex-col items-center justify-center mt-0 pb-9">
+          <p class="text-[#bcf7a4] text-2xl font-bold pt-8">Notificaciones</p>
+        </div>
+      </div>
+    </section>
   </header>
   <main class="back-main">
     <section id="home" class="flex justify-around pt-24 pb-20 items-center">
@@ -149,6 +156,10 @@
       <div id="notificaciones" class="hidden">
         <div class="flex gap-5 pb-8">
           <button id="cerrarNotificaciones" class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
+    </section>
+    <!-- -----------------eliminados--------------------- -->
+    <section>
+      <div></div>
     </section>
   </main>
   <footer class="bg-black h-20 flex justify-center">
