@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Arvo&family=Josefin+Sans&family=Kanit:wght@100;500&family=Lobster+Two:wght@700&family=Lumanosimo&family=Mukta:wght@500&family=Nunito:wght@300&family=Tilt+Neon&family=Ysabeau+Infant:wght@500&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-solid-straight/css/uicons-solid-straight.css'>
-  <link rel="stylesheet" href="./assets/style.css">
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/style.css">
   <title>Sistema de Gym</title>
 </head>
 <body>
-  <header class="bg-black h-20 ">
-    <section id="navbarHome" class="bg-black h-20 flex justify-around">
-    <h1 class="title text-[#bcf7a4] text-5xl p-4">WOLF GYM</h1>
-    <button><i class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
+  <header class="bg-black h-32 flex justify-around">
+    <section id="navbarHome" class="">
+    <h1 class="title text-[#bcf7a4] text-5xl p-4 mt-5">WOLF GYM</h1>
     </section>
-    <section id="navbarTables" class="hidden bg-black h-20 flex justify-around">
+    <section id="navbarTables" class="hidden">
       <h1 class="title text-[#bcf7a4] text-5xl p-4"> WOLF GYM </h1>
     <button id="navbHome" class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]" > <a href="#home">INICIO</a></button>
     <button id="navbIngresar" class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="#tables">INGRESAR</a> </button>
     <button id="navbCobro" class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="#cobro">COBRAR MEMBRESIA</a></button>
     <button id="navbRegister" class="rounded p-2 bg-black font-sans text-2xl text-[#bcf7a4] font-bold hover:text-black hover:bg-[#bcf7a4]"> <a href="#register">REGISTRAR CLIENTE</a></button>
-     <button><i class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
     </section>
+    <button><i id="notificaciones" class="fi fi-ss-cowbell text-[#bcf7a4] text-4xl hover:bg-[#bcf7a4] hover:text-black rounded p-2"></i></button>
   </header>
   <main class="back-main">
     <section id="home" class="flex justify-around pt-24 pb-20 items-center">
@@ -75,8 +78,11 @@
             </div>
           </div>
           <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="obervacionesCliente">Otros/Obervaciones</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="obervacionesCliente" />
+            <label for="fechaForm" class="text-[#bcf7a4]">Fecha</label>
+            <input type="date" id="fechaForm" class="bg-[#424242] rounded h-8 text-[#bcf7a4]">
+            <div id="error-fecha" class="text-red-500 hidden">Por favor completa este campo.</div>
+            <!-- <label class="text-[#bcf7a4]" for="obervacionesCliente">Otros/Obervaciones</label>
+            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="text" name="" id="obervacionesCliente" /> -->
           </div>
           <div class="flex gap-5 pb-8">
             <button type="reset" class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
@@ -96,6 +102,7 @@
             <th class="text-center" >Dias</th>
             <th class="text-center" >Horario</th>
             <th class="text-center" >Pagos</th>
+            <th class="text-center">Fecha</th>
             <th class="text-center">Acciones</th>
           </tr>
           <tbody id="tbody-clientes">
@@ -107,8 +114,8 @@
               <td class="text-center"></td>
               <td class="text-center"></td>
               <td class="text-center gap-5">
-                <button class="text-[#bcf7a4] p-2" >Editar</button>
-                <button class="text-[#bcf7a4] p-2" >Eliminar</button>
+                <button class="text-[#bcf7a4] p-2" ><i class=" fi fi-sr-edit-alt"></i></button>
+                <button class="text-[#bcf7a4] p-2" ><i class=" fi fi-sr-edit-alt"></i></button>
               </td>
             </tr>
           </tbody>
@@ -120,22 +127,28 @@
       <div class="bg-[#212121] flex flex-col gap-5 items-center justify-around">
         <h2 class="text-[#bcf7a4] text-2xl font-bold pt-8">Registrar pago</h2>
           <div class="flex flex-col" >
-            <label class="text-[#bcf7a4]" for="">DNI</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="num" name="" id="">
+            <label class="text-[#bcf7a4]" for="dniCobro">DNI</label>
+            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="num" name="" id="dniCobro">
           </div>
           <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">Fecha</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="date" name="" id="">
+            <label class="text-[#bcf7a4]" for="fechaCobro">Fecha</label>
+            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]" type="date" name="" id="fechaCobro">
           </div>
           <div class="flex flex-col">
-            <label class="text-[#bcf7a4]" for="">Monto</label>
-            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]"  type="number" name="" id="">
+            <label class="text-[#bcf7a4]" for="montoCobro">Monto</label>
+            <input class="bg-[#424242] rounded h-8 text-[#bcf7a4]"  type="number" name="" id="montoCobro">
           </div>
           <div class="flex gap-5 pb-8" >
-            <button class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
-            <button class="bg-[#bcf7a4] p-2 rounded">Agregar</button>
+            <button id="cancelarCobro" class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
+            <button id="agregarCobro" class="bg-[#bcf7a4] p-2 rounded">Agregar</button>
           </div>
         </div>
+    </section>
+    <!-- --------------seccion Notificaciones------------- -->
+    <section id="notificaciones" class="notificaciones hidden">
+      <div id="notificaciones" class="hidden">
+        <div class="flex gap-5 pb-8">
+          <button id="cerrarNotificaciones" class="bg-[#bcf7a4] p-2 rounded">Cancelar</button>
     </section>
   </main>
   <footer class="bg-black h-20 flex justify-center">

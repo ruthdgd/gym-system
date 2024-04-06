@@ -95,6 +95,7 @@ const guardarTablaEnLocalStorage = (tablaData) => {
     const dias = document.getElementById("diasCliente").value;
     const horario = document.getElementById("horarioCliente").value;
     const pago = document.getElementById("pagoCliente").value;
+    const fecha = document.getElementById("fechaForm").value;
 
     if (nombre === '') {
         document.getElementById("error-nombre").classList.remove("hidden");
@@ -111,15 +112,13 @@ const guardarTablaEnLocalStorage = (tablaData) => {
     if (horario === '') {
         document.getElementById("error-horario").classList.remove("hidden");
     }
-    // if (isNaN(pago)) {
-    //     document.getElementById("error-pago").classList.remove("hidden");
-    // }
-    
-      // Si algún campo está vacío, se detiene la ejecución
-      if (nombre === '' || dni === '' || telefono === '' 
-      || dias === '' || horario === '') {
+    if(fecha === ''){
+      document.getElementById("error-fecha").classList.remove("hidden");
+    }
+    if (nombre === '' || dni === '' || telefono === '' 
+      || dias === '' || horario === '' || fecha === '') {
         return; // Detener la ejecución de la función
-      }
+    }
     
       document.getElementById("error-nombre").classList.add("hidden");
       document.getElementById("error-dni").classList.add("hidden");
@@ -127,15 +126,16 @@ const guardarTablaEnLocalStorage = (tablaData) => {
       document.getElementById("error-dias").classList.add("hidden");
       document.getElementById("error-horario").classList.add("hidden");
       document.getElementById("error-pago").classList.add("hidden");
-
+      document.getElementById("error-fecha").classList.add("hidden");
       const registro ={
-        id : uuidv4(),
+        id: uuidv4(),
         nombre: nombre,
         dni: dni,
         telefono: telefono,
         dias: dias,
         horario: horario,
-        pago: pago
+        pago: pago,
+        fecha: fecha
       }
       let tablaData = evaluarLocalStorage();
       tablaData.push(registro)
@@ -154,7 +154,7 @@ const generarTabla = () =>{
     if (registros){
     registros.forEach(registro => {
         tableBody.innerHTML += `
-          <tr class="border border-slate-400 border-white mt-10">
+          <tr class="border border-slate-400 border-white">
               <td class="text-center text-white">${
                 registro.nombre
               }</td>
@@ -168,14 +168,11 @@ const generarTabla = () =>{
               <td class="text-center text-white">${registro.horario}</td>
     
               <td class="text-center text-white" >${registro.pago}</td>
-              <td class="text-[#64c27b] flex justify-center gap-2"> 
-                <button class="edit-btn" data-id="${
-                  registro.id
-                }"><i class="fi fi-sr-edit-alt"></i> 
+              <td class="text-center text-white" >${registro.fecha}</td>
+              <td class="text-[#64c27b] flex justify-center gap-2 text-xs lg:text-base"> 
+                <button class="" id="${registro.id}"><i class="fi fi-sr-edit-alt"></i>
                 </button>
-                <button class="delete-btn" onclick="mostrarModalEliminar('${
-                  registro.id
-                }')"('${registro.id}')"><i class="fi fi-sr-trash"></i> 
+                <button class="" id="${registro.id}"><i class="fi fi-sr-trash"></i>
                 </button>
               </td>
           </tr>
@@ -185,3 +182,48 @@ const generarTabla = () =>{
 document.addEventListener("DOMContentLoaded", function() {
     generarTabla();
   });
+
+
+  document.getElementById("agregarCobro").addEventListener("click", () => {
+    const dniCobro = document.getElementById("dniCobro").value;
+    const fechaCobro = document.getElementById("fechaCobro").value;
+    const montoCobro = document.getElementById("montoCobro").value;
+
+    // Validar que se ingresen todos los campos necesarios
+    if (dniCobro === '' || fechaCobro === '' || montoCobro === '') {
+        alert("Por favor complete todos los campos.");
+        return;
+    }
+
+    // Buscar el registro correspondiente al DNI ingresado
+    const registros = evaluarLocalStorage();
+    const registroEncontrado = registros.find(registro => registro.dni === dniCobro);
+
+    if (!registroEncontrado) {
+        alert("No se encontró ningún cliente con el DNI ingresado.");
+        return;
+    }
+
+    // Actualizar la fecha y el monto en el registro encontrado
+    registroEncontrado.fecha = fechaCobro;
+    registroEncontrado.pago = montoCobro;
+
+    // Guardar los cambios en el almacenamiento local
+    guardarTablaEnLocalStorage(registros);
+
+    // Regenerar la tabla con los datos actualizados
+    generarTabla();
+
+    // Limpiar los campos del formulario de cobro
+    document.getElementById("dniCobro").value = '';
+    document.getElementById("fechaCobro").value = '';
+    document.getElementById("montoCobro").value = '';
+
+    // Mostrar un mensaje de éxito
+    alert("El pago se registró correctamente.");
+});
+
+
+  // onclick="mostrarModalEliminar('${
+  //   registro.id
+  // }')"
