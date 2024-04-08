@@ -7,7 +7,8 @@
     background-color: #212121;
     position: absolute;
     top: 0;
-    transform: translate(-42%, 100%);
+    padding-left: 20px;
+    transform: translate(-42%, 35%);
     display: none;
     overflow: hidden;
   }
@@ -34,6 +35,12 @@
   color:#bcf7a4;
   font-size: 2rem;
   transition: opacity 0.1s ease-out;
+}
+.contentNotif{
+  color: #bcf7a4;
+  font-weight: bolder;
+  top: 0;
+  position: absolute;
 }
 
    .back-main{

@@ -278,37 +278,42 @@ document.addEventListener("DOMContentLoaded", function() {
     content.classList.toggle("active");
   });
 
-//////////////////////////////////Notificaciones//////////////////////////////////////////////////////////////////////
-  const nuevaNotificacion = () =>{
-    // Limpiar notificaciones anteriores
-    const notificaciones = document.getElementById("notificaciones");
-    notificaciones.innerHTML = "";
 
+//////////////////////////////////Notificaciones//////////////////////////////////////////////////////////////////////
+
+  const nuevaNotificacion = () => {
+  // Limpiar notificaciones anteriores
+    const notificaciones = document.getElementById("clienteNotificado");
+    notificaciones.innerHTML =`<div class="flex flex-col items-center justify-center mt-0 pb-9">
+    <p class="text-[#bcf7a4] text-2xl font-bold pt-8">Notificaciones</p>
+  </div>`;
+
+    const fechaActual = new Date();
+    const fechasClientes = [];
     const registros = evaluarLocalStorage();
-    const hoy = new Date();
 
     registros.forEach(registro => {
-        const fechaVencimiento = new Date(registro.fecha);
-        const tiempoRestante = fechaVencimiento.getTime() - hoy.getTime();
-        const diasRestantes = Math.floor(tiempoRestante / (1000 * 3600 * 24));
-
-        // Verificar si la cuota está a punto de vencer en un mes (30 días)
-        if (diasRestantes <= 30 && diasRestantes >= 0) {
-            // Crear elementos HTML para la notificación
-            const boton = document.createElement("button");
-            boton.innerHTML = "Cuota por vencer";
-            boton.classList.add("btn-notificacion");
-            boton.addEventListener("click", () => {
-                // Lógica para manejar el clic en la notificación
-                // Puedes agregar aquí lo que quieras que suceda cuando se hace clic en la notificación
-            });
-
-            const parrafo = document.createElement("p");
-            parrafo.innerHTML = `La cuota de ${registro.nombre} vence pronto (${diasRestantes} días)`;
-
-            // Agregar elementos a la lista de notificaciones
-            notificaciones.appendChild(boton);
-            notificaciones.appendChild(parrafo);
-        }
+      fechasClientes.push({
+          fecha: new Date(registro.fecha),
+          nombre: registro.nombre,
+          dni: registro.dni
+      });
     });
-  }
+
+    fechasClientes.forEach(fechaCliente => {
+      const fechaVencimiento = new Date(fechaCliente.fecha);
+      fechaVencimiento.setDate(fechaVencimiento.getDate() + 30);
+
+      // Comparar la fecha del vencimiento con la fecha actual
+      if (fechaVencimiento.getTime() <= fechaActual.getTime()) {
+        notificaciones.innerHTML += `
+        <div class="flex flex-col items-center justify-center mt-0">
+    <p class="text-[#bcf7a4] text-xl font-bold ">Cuota a vencer para ${fechaCliente.nombre} ${fechaCliente.dni}</p>
+  </div>`
+      }
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    nuevaNotificacion();
+  });
